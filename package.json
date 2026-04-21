@@ -24,6 +24,7 @@
     "vitest": "^2.1.0"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3",
     "@extractus/article-extractor": "^8.0.20",
     "astro": "^5",
