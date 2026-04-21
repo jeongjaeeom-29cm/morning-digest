@@ -1,0 +1,15 @@
+{
+  "id": "0000000000000000000000000000000000000001",
+  "url": "https://example.com/intro",
+  "title": "Intro to morning-digest",
+  "source": { "slug": "seed", "name": "Seed", "category": "ai" },
+  "publishedAt": "2026-04-21T00:00:00.000Z",
+  "ingestedAt": "2026-04-21T05:30:00.000Z",
+  "tags": ["ai"],
+  "summary": "시드 데이터입니다. UI 개발 중에만 사용합니다.",
+  "highlights": ["UI 개발용", "빈 컬렉션 방지"],
+  "filterScore": 7,
+  "thumbnail": null,
+  "author": null,
+  "lang": "ko"
+}
