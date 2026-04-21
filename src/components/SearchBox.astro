@@ -1,0 +1,27 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+<div style="margin:12px 0;">
+  <input id="sb-input" type="search" placeholder="Search…" style="width:100%;padding:8px 12px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--fg);" />
+  <ul id="sb-results" style="list-style:none;padding:0;margin:8px 0;"></ul>
+</div>
+<script define:vars={{ base }}>
+  const input = document.getElementById('sb-input');
+  const list = document.getElementById('sb-results');
+  let fuse = null;
+  async function init() {
+    if (fuse) return;
+    const mod = await import('fuse.js');
+    const Fuse = mod.default;
+    const res = await fetch(`${base}/search-index.json`);
+    const data = await res.json();
+    fuse = new Fuse(data.items ?? [], { keys: ['title', 'summary', 'tags', 'source'], threshold: 0.35 });
+  }
+  input.addEventListener('input', async (e) => {
+    const q = e.target.value.trim();
+    if (!q) { list.innerHTML = ''; return; }
+    await init();
+    const hits = fuse.search(q).slice(0, 10);
+    list.innerHTML = hits.map(h => `<li><a href="${h.item.url}">${h.item.title}</a></li>`).join('');
+  });
+</script>
