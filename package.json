@@ -25,8 +25,10 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3",
+    "@extractus/article-extractor": "^8.0.20",
     "astro": "^5",
     "better-sqlite3": "^12.9.0",
+    "franc": "^6.2.0",
     "p-limit": "^7.3.0",
     "rss-parser": "^3.13.0",
     "sharp": "^0.33",
