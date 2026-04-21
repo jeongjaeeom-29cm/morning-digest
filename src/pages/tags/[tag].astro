@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ItemCard from '../../components/ItemCard.astro';
+
+export async function getStaticPaths() {
+  const items = await getCollection('items');
+  const tags = new Set<string>();
+  for (const i of items) for (const t of i.data.tags) tags.add(t);
+  return [...tags].map(tag => ({ params: { tag } }));
+}
+
+const { tag } = Astro.params as { tag: string };
+const items = (await getCollection('items'))
+  .filter(i => i.data.tags.includes(tag))
+  .sort((a, b) => Date.parse(b.data.publishedAt) - Date.parse(a.data.publishedAt));
+---
+<Base title={`#${tag} — morning-digest`}>
+  <h1>#{tag}</h1>
+  {items.map(i => <ItemCard item={i} />)}
+</Base>
