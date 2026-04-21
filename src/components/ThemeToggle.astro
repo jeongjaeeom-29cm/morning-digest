@@ -1,0 +1,15 @@
+---
+---
+<button id="theme-toggle" aria-label="Toggle theme" style="margin-left:auto;padding:6px 10px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--fg);cursor:pointer;">
+  Theme
+</button>
+<script>
+  const btn = document.getElementById('theme-toggle')!;
+  btn.addEventListener('click', () => {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme') ?? 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch {}
+  });
+</script>
