@@ -1,0 +1,8 @@
+sources:
+  - slug: infoq-ai
+    name: InfoQ AI
+    feedUrl: https://feed.infoq.com/ai-ml/
+    siteUrl: https://www.infoq.com/ai-ml/
+    category: ai
+    priority: 8
+    tags: [ai, llm]

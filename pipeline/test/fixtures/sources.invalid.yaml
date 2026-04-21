@@ -1,0 +1,6 @@
+sources:
+  - slug: Bad Slug!
+    name: ''
+    feedUrl: not-a-url
+    siteUrl: https://x.example
+    category: ai

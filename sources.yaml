@@ -1,0 +1,15 @@
+sources:
+  - slug: simonw-blog
+    name: Simon Willison
+    feedUrl: https://simonwillison.net/atom/everything/
+    siteUrl: https://simonwillison.net/
+    category: ai
+    priority: 9
+    tags: [ai, llm]
+  - slug: martin-fowler
+    name: Martin Fowler
+    feedUrl: https://martinfowler.com/feed.atom
+    siteUrl: https://martinfowler.com/
+    category: architecture
+    priority: 7
+    tags: [architecture, backend]
