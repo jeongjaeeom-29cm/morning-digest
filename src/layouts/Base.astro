@@ -1,0 +1,35 @@
+---
+interface Props { title: string; description?: string }
+const { title, description = 'morning-digest' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  <link rel="stylesheet" href={`${base}/styles.css`} />
+  <script is:inline>
+    (function () {
+      try {
+        const saved = localStorage.getItem('theme');
+        const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const t = saved ?? (preferDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+      } catch {}
+    })();
+  </script>
+</head>
+<body>
+  <nav>
+    <a href={base + '/'}>Home</a>
+    <a href={base + '/archive'}>Archive</a>
+    <slot name="nav-extra" />
+  </nav>
+  <main class="container">
+    <slot />
+  </main>
+</body>
+</html>
