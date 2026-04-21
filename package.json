@@ -28,6 +28,7 @@
     "@extractus/article-extractor": "^8.0.20",
     "astro": "^5",
     "better-sqlite3": "^12.9.0",
+    "execa": "^9.6.1",
     "franc": "^6.2.0",
     "p-limit": "^7.3.0",
     "rss-parser": "^3.13.0",
