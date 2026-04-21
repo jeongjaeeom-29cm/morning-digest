@@ -1,6 +1,17 @@
 ---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ItemCard from '../components/ItemCard.astro';
+
+const all = await getCollection('items');
+const now = Date.now();
+const thirtyDays = 30 * 86400_000;
+const recent = all
+  .filter(e => now - Date.parse(e.data.publishedAt) < thirtyDays)
+  .sort((a, b) => Date.parse(b.data.publishedAt) - Date.parse(a.data.publishedAt));
 ---
-<html lang="ko">
-  <head><meta charset="utf-8"><title>morning-digest</title></head>
-  <body><h1>morning-digest scaffold</h1></body>
-</html>
+<Base title="morning-digest">
+  <h1>Today's picks</h1>
+  {recent.length === 0 && <p>No items in the last 30 days.</p>}
+  {recent.map(item => <ItemCard item={item} />)}
+</Base>
