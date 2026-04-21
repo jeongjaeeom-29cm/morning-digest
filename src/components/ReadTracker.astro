@@ -1,0 +1,36 @@
+---
+---
+<script>
+  const KEY = 'read-items';
+  function load(): Set<string> {
+    try { return new Set(JSON.parse(localStorage.getItem(KEY) ?? '[]')); } catch { return new Set(); }
+  }
+  function save(s: Set<string>) { try { localStorage.setItem(KEY, JSON.stringify([...s])); } catch {} }
+
+  const read = load();
+  function mark(el: HTMLElement) {
+    const id = el.getAttribute('data-item-id');
+    if (!id || read.has(id)) return;
+    read.add(id); save(read);
+    el.setAttribute('data-read', 'true');
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-item-id]').forEach(el => {
+    if (read.has(el.getAttribute('data-item-id')!)) el.setAttribute('data-read', 'true');
+    el.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mark(el)));
+  });
+
+  if ('IntersectionObserver' in window) {
+    const timers = new WeakMap<Element, number>();
+    const io = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          timers.set(e.target, window.setTimeout(() => mark(e.target as HTMLElement), 3000));
+        } else {
+          const t = timers.get(e.target); if (t) window.clearTimeout(t);
+        }
+      }
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-item-id]').forEach(el => io.observe(el));
+  }
+</script>
