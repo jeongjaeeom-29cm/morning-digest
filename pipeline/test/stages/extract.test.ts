@@ -25,7 +25,7 @@ describe('runExtract', () => {
     const extractFn = vi.fn().mockRejectedValue(new Error('nope'));
     const out = await runExtract({ items: [raw], extractFn, concurrency: 2 });
     expect(out.items).toHaveLength(1);
-    expect(out.items[0].content).toBe('');
+    expect(out.items[0]!.content).toBe('');
     expect(out.extractErrors).toHaveLength(1);
   });
 });

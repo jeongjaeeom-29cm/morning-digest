@@ -10,7 +10,7 @@ describe('loadSources', () => {
   it('parses a valid yaml', async () => {
     const sources = await loadSources(FIX('sources.valid.yaml'));
     expect(sources).toHaveLength(1);
-    expect(sources[0].slug).toBe('infoq-ai');
+    expect(sources[0]!.slug).toBe('infoq-ai');
   });
 
   it('throws a descriptive error for invalid yaml', async () => {

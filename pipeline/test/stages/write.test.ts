@@ -21,7 +21,7 @@ describe('runWrite', () => {
     runWrite({ curated: [curated], sources: [src], contentDir, searchIndexPath: searchIndex, ingestedAt: '2026-04-21T05:30:00.000Z' });
     const files = readdirSync(contentDir);
     expect(files).toEqual([`${curated.id}.json`]);
-    const wrote = JSON.parse(readFileSync(join(contentDir, files[0]), 'utf8'));
+    const wrote = JSON.parse(readFileSync(join(contentDir, files[0]!), 'utf8'));
     expect(wrote.source).toMatchObject({ slug: 's', name: 'S', category: 'ai' });
     const idx = JSON.parse(readFileSync(searchIndex, 'utf8'));
     expect(idx.items[0]).toMatchObject({ id: curated.id, title: 't' });

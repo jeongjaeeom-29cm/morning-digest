@@ -24,7 +24,7 @@ describe('runLlm', () => {
     }));
     const out = await runLlm({ items: [extracted], runner });
     expect(out.items).toHaveLength(1);
-    expect(out.items[0].summary).toBe('요약.');
+    expect(out.items[0]!.summary).toBe('요약.');
   });
 
   it('retries once on schema failure, then falls back', async () => {
@@ -33,7 +33,7 @@ describe('runLlm', () => {
     const out = await runLlm({ items: [extracted], runner });
     expect(calls).toBe(2);
     expect(out.items).toHaveLength(1);
-    expect(out.items[0].summary).toMatch(/^title/);
+    expect(out.items[0]!.summary).toMatch(/^title/);
     expect(out.fallbacks).toEqual([extracted.id]);
   });
 
